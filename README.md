@@ -1,2 +1,2 @@
 # SimpleGameOfLife
-Very simple Game of life simulation implemented in Unity 3d
+Very simple Game of life simulation implementations
