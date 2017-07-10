@@ -1,4 +1,6 @@
-
+var tiles=[[]];
+var centerPos=[16,16];
+var radius=3;
 var HelloWorldLayer = cc.Layer.extend({
     sprite:null,
     ctor:function () {
@@ -32,7 +34,7 @@ var HelloWorldLayer = cc.Layer.extend({
     },
 showTiles:function()
 	{
-		var tiles=[[]];// cc.Sprite
+		// cc.Sprite
 		
 		for(var i=0;i<35;i++)
 		{
@@ -44,6 +46,10 @@ showTiles:function()
 				var posX=(300)+((spr[j]._getWidth()+spr[j]._getWidth()*0.1)*j);
 				var posY=(100)+((spr[j]._getHeight()+spr[j]._getHeight()*0.1)*i);				
 				spr[j].setPosition(posX,posY);
+				if(i==j && i==17)
+				{
+					spr[j].setColor(new cc.Color(0, 255, 0,0));
+				}
 				this.addChild(spr[j]);
 			}
 			tiles.push(spr);
