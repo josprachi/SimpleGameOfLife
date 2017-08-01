@@ -56,15 +56,15 @@ showTiles:function()
 	{
 		// cc.Sprite
 		
-		for(var i=0;i<35;i++)
+		for(var i=0;i<10;i++)
 		{
 			var spr=[];
 			//tiles[i].push([])
-			for(var j=0;j<35;j++)
+			for(var j=0;j<10;j++)
 			{
 				spr.push(new Cell(res.boxPng));
-				var posX=(300)+((spr[j]._getWidth()+spr[j]._getWidth()*0.1)*j);
-				var posY=(100)+((spr[j]._getHeight()+spr[j]._getHeight()*0.1)*i);				
+				var posX=(150)+((spr[j]._getWidth()+spr[j]._getWidth()*0.1)*j);
+				var posY=(150)+((spr[j]._getHeight()+spr[j]._getHeight()*0.1)*i);				
 				spr[j].setPosition(posX,posY);
 				if(i==j && i==17)
 				{
