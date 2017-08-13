@@ -18,10 +18,17 @@ var Cell=cc.Sprite.extend({
 		{
 			this.setColor(new cc.Color(0, 0, 0,0));
 		}
-	}
+	},
+	update:function(dt)
+	{
+		
+		
+	},
+	
 });
 var HelloWorldLayer = cc.Layer.extend({
     sprite:null,
+	startBtn:null,
 	seedSpr:[],
     ctor:function () {
         //////////////////////////////
@@ -34,7 +41,7 @@ var HelloWorldLayer = cc.Layer.extend({
         // ask the window size
         var size = cc.winSize;
 
-        var node = new cc.Node();
+       // var node = new cc.Node();
 
         //Whether to demonstrate the effects inside a smaller rect
 		var visiableSize = cc.director.getVisibleSize();
@@ -46,10 +53,12 @@ var HelloWorldLayer = cc.Layer.extend({
 		 var gradient = new cc.LayerGradient( cc.color(255,0,0,255), cc.color(255,255,0,255));
        
 		var bg = new cc.Sprite(res.HelloWorld_png);
-        bg.x = size.width/2;
-        bg.y = size.height/2;
-        this.addChild(node);//.addChild( bg );
+		startBtn=new cc.Sprite(res.startBtnPng);
+        startBtn.setPosition(size.width*0.35,30);
+		
+       // this.addChild(node);//.addChild( bg );
 		this.showTiles();
+		this.addChild(startBtn);
         return true;
     },
 showTiles:function()
