@@ -148,12 +148,15 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
     },
 
     visit: function (parent) {
-        // quick return if not visible
-        if (!this._visible)
-            return;
+        var cmd = this._renderCmd, parentCmd = parent ? parent._renderCmd : null;
 
-        var cmd = this._renderCmd;
-        cmd.visit(parent && parent._renderCmd);
+        // quick return if not visible
+        if (!this._visible) {
+            cmd._propagateFlagsDown(parentCmd);
+            return;
+        }
+
+        cmd.visit(parentCmd);
         cc.renderer.pushRenderCommand(cmd);
         cmd._dirtyFlag = 0;
     },
@@ -274,9 +277,6 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
             cc.log("cc.ParticleBatchNode.reorderChild(): Child doesn't belong to batch");
             return;
         }
-
-        if (zOrder === child.zIndex)
-            return;
 
         // no reordering if only 1 child
         if (this._children.length > 1) {

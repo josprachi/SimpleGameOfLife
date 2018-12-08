@@ -136,6 +136,7 @@ cc.Director = cc.Class.extend(/** @lends cc.Director# */{
         //action manager
         if (cc.ActionManager) {
             this._actionManager = new cc.ActionManager();
+            this._scheduler.scheduleUpdate(this._actionManager, cc.Scheduler.PRIORITY_SYSTEM, false);
         } else {
             this._actionManager = null;
         }
@@ -183,7 +184,7 @@ cc.Director = cc.Class.extend(/** @lends cc.Director# */{
     convertToGL: function (uiPoint) {
         var docElem = document.documentElement;
         var view = cc.view;
-        var box = element.getBoundingClientRect();
+        var box = docElem.getBoundingClientRect();
         box.left += window.pageXOffset - docElem.clientLeft;
         box.top += window.pageYOffset - docElem.clientTop;
         var x = view._devicePixelRatio * (uiPoint.x - box.left);
@@ -202,7 +203,7 @@ cc.Director = cc.Class.extend(/** @lends cc.Director# */{
     convertToUI: function (glPoint) {
         var docElem = document.documentElement;
         var view = cc.view;
-        var box = element.getBoundingClientRect();
+        var box = docElem.getBoundingClientRect();
         box.left += window.pageXOffset - docElem.clientLeft;
         box.top += window.pageYOffset - docElem.clientTop;
         var uiPoint = {x: 0, y: 0};
@@ -228,7 +229,6 @@ cc.Director = cc.Class.extend(/** @lends cc.Director# */{
 
         //tick before glClear: issue #533
         if (!this._paused) {
-            this._actionManager.update(this._deltaTime);
             this._scheduler.update(this._deltaTime);
             cc.eventManager.dispatchEvent(this._eventAfterUpdate);
         }
@@ -943,4 +943,4 @@ cc.Director.PROJECTION_CUSTOM = 3;
  * @constant
  * @type {Number}
  */
-cc.Director.PROJECTION_DEFAULT = cc.Director.PROJECTION_2D;
+cc.Director.PROJECTION_DEFAULT = cc.Director.PROJECTION_3D;
